@@ -1,8 +1,9 @@
-# Meteor Addon Template
+# Pristine Hack
+- Repo updates 1-2 days after when clients find exploits.
+- Some shit will stay private.
+- Enjoy whatever you use this for.
 
-A template to allow easy usage of the Meteor Addon API.
+## Build
+-Clone it git clone `https://github.com/pristinecodes/PristineHack`
 
-### How to use:  
-- Clone this project
-- Use this template to create new modules/commands
-- Run the mod with Meteor.
+-Build it `./gradlew build`
