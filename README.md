@@ -1,3 +1,6 @@
+## 5C Grim Trident Bypass.
+If you like this consider insiding for us.
+
 ## License
 The Skid License.
 
