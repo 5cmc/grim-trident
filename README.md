@@ -7,7 +7,7 @@ If you like this consider insiding for us.
 - Use the following settings for the full Grim movement disabler:
   - Enable the `GrimDisable` module
   - Set TridentDelay to `0`
-- Enable meteor flight and tune the settings to where you dont get rubberbanded
+- Enable Meteor flight and tune the settings to where you dont get rubberbanded
 ## License
 The Skid License.
 ## Build
