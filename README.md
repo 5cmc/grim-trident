@@ -1,9 +1,7 @@
-# Pristine Hack
-- Repo updates 1-2 days after when clients find exploits.
-- Some shit will stay private.
-- Enjoy whatever you use this for.
+## License
+The Skid License.
 
 ## Build
--Clone it git clone `https://github.com/pristinecodes/PristineHack`
+-Clone it git clone `https://github.com/5cmc/grim-trident`
 
 -Build it `./gradlew build`
