@@ -19,15 +19,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class GrimDisabler extends Module {
-    public GrimDisabler() {
-        super(Addon.CATEGORY, "Grim Disabler", "Full Movement Grim Disabler.");
-    }
-
-    private int tick = 0;
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
+
     private final Setting<Integer> tridentDelay = sgGeneral.add(
         new IntSetting.Builder()
-            .name("TridentDelay")
+            .name("Trident delay")
+            .description("delay (in ticks) between trident uses")
             .sliderRange(0, 20)
             .range(0, 20)
             .defaultValue(0)
@@ -36,11 +33,25 @@ public class GrimDisabler extends Module {
 
     private final Setting<Boolean> grimDisable = sgGeneral.add(
         new BoolSetting.Builder()
-            .name("DisableGrim")
+            .name("Grim")
+            .description("bypass grim movement checks")
             .defaultValue(false)
-            .description("Full Movement Disabler.")
             .build()
     );
+
+    private final Setting<Boolean> pauseOnEat = sgGeneral.add(
+        new BoolSetting.Builder()
+            .name("Pause on eat")
+            .description("Pauses when eating (buggy)")
+            .defaultValue(false)
+            .build()
+    );
+
+    private int tick = 0;
+
+    public GrimDisabler() {
+        super(Addon.CATEGORY, "Grim Disabler", "Full grim movement disabler");
+    }
 
     @Override
     public void onActivate() {
@@ -48,17 +59,16 @@ public class GrimDisabler extends Module {
     }
 
     @EventHandler
-    private void onTick(TickEvent.Post event) {
+    private void onTick(TickEvent.Pre event) {
         if (tick <= 0) {
             if (tridentDelay.get() != 0) tick = tridentDelay.get();
 
             int tridentSlot = InvUtils.findInHotbar(Items.TRIDENT).slot();
             int oldSlot = mc.player.getInventory().selectedSlot;
 
-            if (tridentSlot == -1) return;
+            if (tridentSlot == -1 || (pauseOnEat.get() && mc.player.isUsingItem())) return;
 
             mc.player.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(tridentSlot));
-
             mc.player.networkHandler.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, Direction.DOWN));
 
             if (!grimDisable.get()) {
@@ -72,9 +82,8 @@ public class GrimDisabler extends Module {
                 h *= n / m;
                 k *= n / m;
                 l *= n / m;
-                mc.player.addVelocity((double)h, (double)k, (double)l);
+                mc.player.addVelocity(h, k, l);
                 if (mc.player.isOnGround()) {
-                    float o = 1.1999999F;
                     mc.player.move(MovementType.SELF, new Vec3d(0.0, 1.1999999F, 0.0));
                 }
             }
@@ -84,7 +93,5 @@ public class GrimDisabler extends Module {
         } else {
             tick--;
         }
-
     }
-
 }

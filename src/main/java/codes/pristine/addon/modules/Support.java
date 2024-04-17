@@ -1,7 +1,6 @@
 package codes.pristine.addon.modules;
 
 import codes.pristine.addon.Addon;
-import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import net.minecraft.util.Util;
 
@@ -13,5 +12,6 @@ public class Support extends Module {
     @Override
     public void onActivate() {
         Util.getOperatingSystem().open("https://discord.gg/thefifthcolumn");
+        toggle();
     }
 }
