@@ -12,7 +12,9 @@ import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.MovementType;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
+import net.minecraft.network.packet.c2s.play.PlayerInteractItemC2SPacket;
 import net.minecraft.network.packet.c2s.play.UpdateSelectedSlotC2SPacket;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -69,6 +71,7 @@ public class GrimDisabler extends Module {
             if (tridentSlot == -1 || (pauseOnEat.get() && mc.player.isUsingItem())) return;
 
             mc.player.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(tridentSlot));
+            mc.player.networkHandler.sendPacket(new PlayerInteractItemC2SPacket(Hand.MAIN_HAND, 0));
             mc.player.networkHandler.sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, Direction.DOWN));
 
             if (!grimDisable.get()) {
