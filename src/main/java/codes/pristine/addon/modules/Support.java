@@ -6,7 +6,7 @@ import net.minecraft.util.Util;
 
 public class Support extends Module {
     public Support() {
-        super(Addon.CATEGORY, "5C Support", "Join our Discord.");
+        super(Addon.CATEGORY, "5C Support", "Join our Discord");
     }
 
     @Override

@@ -2,13 +2,14 @@
   "schemaVersion": 1,
   "id": "the5cgrim",
   "version": "${version}",
-  "name": "5c Addon",
-  "description": "A repo for public bypasses.",
+  "name": "5C Trident Fly",
+  "description": "2b2t movement check disabler",
   "authors": [
-    "Pristine"
+    "Pristine",
+    "Logykk"
   ],
   "contact": {
-    "repo": ""
+    "repo": "https://github.com/5cmc/grim-trident"
   },
   "icon": "assets/5c/logo.png",
   "environment": "client",
@@ -20,6 +21,9 @@
   "custom": {
     "meteor-client:color": "225,25,25"
   },
+  "mixins": [
+    "5c.mixins.json"
+  ],
   "depends": {
     "java": ">=17",
     "minecraft": ">=${mc_version}",
